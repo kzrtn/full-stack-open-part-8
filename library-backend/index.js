@@ -99,7 +99,7 @@ let books = [
 
 const typeDefs = /* GraphQL */`
   type Author {
-    name: String!
+    name: String
     born: String
     id: ID!
     bookCount: Int!
@@ -107,7 +107,7 @@ const typeDefs = /* GraphQL */`
 
   type Book {
     title: String!
-    published: String!
+    published: Int!
     author: String!
     genres: [String!]!
     id: ID!
@@ -118,6 +118,15 @@ const typeDefs = /* GraphQL */`
     authorCount: Int!
     allBooks(author: String, genre: String): [Book!]
     allAuthors: [Author!]
+  }
+
+  type Mutation {
+    addBook(
+      title: String!
+      author: String!
+      published: Int!
+      genres: [String!]!
+    ) : Book
   }
 `
 
@@ -139,6 +148,23 @@ const resolvers = {
   },
   Author: {
     bookCount: (author) => books.filter(b => b.author === author.name).length
+  },
+  Mutation: {
+    addBook: (root, args) => {
+      const newBook = {
+        ...args,
+        id: crypto.randomUUID()
+      }
+      books = books.concat(newBook)
+      const author = authors.find(a => a.name === args.author)
+      if (!author) {
+        authors = authors.concat({
+          name: args.author,
+          id: crypto.randomUUID()
+        })
+      }
+      return newBook
+    }
   }
 }
 
