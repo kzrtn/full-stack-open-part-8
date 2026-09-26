@@ -1,0 +1,24 @@
+{
+  "name": "full-stack-open-part-8",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kzrtn/full-stack-open-part-8#readme",
+  "bugs": {
+    "url": "https://github.com/kzrtn/full-stack-open-part-8/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kzrtn/full-stack-open-part-8.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix library-frontend\" \"npm run dev --prefix library-backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
