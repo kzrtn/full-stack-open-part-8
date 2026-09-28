@@ -3,14 +3,14 @@ const { startStandaloneServer } = require("@apollo/server/standalone")
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
 
-const startServer = () => {
+const startServer = PORT => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
   })
 
   startStandaloneServer(server, {
-    listen: { port: 4000 },
+    listen: { PORT },
   }).then(({ url }) => {
     console.log(`Server ready at ${url}`)
   })
