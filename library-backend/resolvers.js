@@ -19,14 +19,14 @@ const resolvers = {
             }
           })
         }
-        return Book.find({ author: author._id })
+        return Book.find({ author: author._id }).populate('author')
       }
       
       if (args.genre) {
-        return await Book.find({ genres: args.genre })
+        return await Book.find({ genres: args.genre }).populate('author')
       }
 
-      return Book.find({})
+      return Book.find({}).populate('author')
     },
     allAuthors: async () => Author.find({}) ,
     me: (root, args, context) => context.currentUser
