@@ -33,7 +33,7 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
-      <AuthorForm authors={authors} />
+      {props.isLoggedIn && <AuthorForm authors={authors} />}
     </div>
   )
 }

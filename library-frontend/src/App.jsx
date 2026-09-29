@@ -29,7 +29,7 @@ const App = () => {
         ) : (<button onClick={() => setPage('login')}>login</button>)}
       </div>
 
-      <Authors show={page === 'authors'} />
+      <Authors show={page === 'authors'} isLoggedIn={token} />
 
       <Books show={page === 'books'} />
 
