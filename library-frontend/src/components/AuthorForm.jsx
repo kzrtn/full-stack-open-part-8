@@ -28,7 +28,7 @@ const AuthorForm = ({authors}) => {
         <div>
           name
           <select name="author">
-            {authors.map(a => (<option value={a.name} id={a.id}>{a.name}</option>))}
+            {authors.map(a => (<option value={a.name} id={a.id} key={a.id}>{a.name}</option>))}
           </select>
         </div>
         <div>
