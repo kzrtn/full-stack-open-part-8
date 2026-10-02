@@ -29,6 +29,7 @@ module.exports = defineConfig({
       command: 'npm run dev',
       cwd: '../library-frontend',
       url: 'http://localhost:5173',
+      env: { VITE_GRAPHQL_URI: 'http://localhost:4000' },
       timeout: 30000,
       reuseExistingServer: false,
     },
