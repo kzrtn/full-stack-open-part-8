@@ -16,7 +16,7 @@ const authLink = new SetContextLink(({ headers}) => {
 })
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3001',
+  uri: import.meta.env.VITE_GRAPHQL_URI ?? 'http://localhost:3001',
 })
 
 const client = new ApolloClient({
