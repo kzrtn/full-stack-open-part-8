@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useMutation } from "@apollo/client/react"
-import { LOGIN } from "../queries"
+import { LOGIN, ME } from "../queries"
 
 const LoginForm = (props) => {
   const [username, setUsername] = useState('')
@@ -10,9 +10,10 @@ const LoginForm = (props) => {
       const token = data.login.value
       props.setToken(token)
       localStorage.setItem('library-user-token', token)
+      props.client.resetStore()
       props.setPage('authors')
     },
-    onError: error => console.log(error)
+    onError: error => props.setError('login failed')
   })
 
   if (!props.show) return null

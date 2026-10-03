@@ -5,8 +5,10 @@ import Books from './components/Books'
 import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
 import Recommend from './components/Recommend'
+import Notify from './components/Notify'
 
 const App = () => {
+  const [errorMessage, setErrorMessage] = useState(null)
   const [page, setPage] = useState('authors')
   const [token, setToken] = useState(localStorage.getItem('library-user-token'))
   const client = useApolloClient()
@@ -15,6 +17,13 @@ const App = () => {
     setToken(null)
     localStorage.clear()
     client.resetStore()
+  }
+
+  const notify = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 10000)
   }
 
   return (
@@ -30,6 +39,7 @@ const App = () => {
           </>
         ) : (<button onClick={() => setPage('login')}>login</button>)}
       </div>
+      <Notify error_message={errorMessage} />
 
       <Authors show={page === 'authors'} isLoggedIn={token} />
 
@@ -37,9 +47,9 @@ const App = () => {
 
       <NewBook show={page === 'add'} setPage={setPage} />
 
-      <Recommend show={page === 'recommend'} />
+      <Recommend show={page === 'recommend'}/>
 
-      <LoginForm show={page === 'login'} setToken={setToken} setPage={setPage} />
+      <LoginForm show={page === 'login'} setToken={setToken} client={client} setPage={setPage} setError={notify} />
       
     </div>
   )
